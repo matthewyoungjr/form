@@ -1,6 +1,7 @@
 # Form
 
 Reusable Form Component for my future projects.
+Feel free to customize it to your taste.
 
 # Installation
 
@@ -8,6 +9,11 @@ Reusable Form Component for my future projects.
 npm i
 
 ```
+
+# UI Library & Framework Used :
+
+- Tailwind CSS
+- DaisyUI
 
 # Stack used :
 
