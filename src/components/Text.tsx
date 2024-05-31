@@ -1,7 +1,7 @@
 const Text = ({ text }: { text: string }) => {
   return (
     <div>
-      <h1 className="font-sans font-semibold text-3xl text-white text-center antialiased py-5">
+      <h1 className="font-sans font-semibold text-4xl text-white text-center antialiased mt-10 py-5">
         {" "}
         {text}{" "}
       </h1>
