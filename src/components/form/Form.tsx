@@ -1,11 +1,26 @@
 import { FieldValues, useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const schema = z.object({
+  name: z
+    .string({ required_error: "Name is required. 🧐" })
+    .min(3, { message: "Name must be at least 3 characters" }),
+  email: z.string().email().min(6).max(25),
+  password: z
+    .string()
+    .min(6, { message: "Password should have at least 6 characters." })
+    .max(20),
+});
+
+type FormData = z.infer<typeof schema>;
 
 const Form = () => {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitted, isValid },
-  } = useForm();
+    formState: { isSubmitted, errors },
+  } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const onSubmit = (data: FieldValues) => {
     console.log(data);
@@ -24,6 +39,9 @@ const Form = () => {
             type="text"
             className="input input-bordered w-full max-w-xs"
           />
+          {errors.name?.message && (
+            <p className="text-red-500">{errors.name.message}</p>
+          )}
         </div>
 
         <div className="mb-5">
@@ -36,6 +54,9 @@ const Form = () => {
             type="email"
             className="input input-bordered w-full max-w-xs"
           />
+          {errors.email?.message && (
+            <p className="text-red-500">{errors.email.message}</p>
+          )}
         </div>
 
         <div className="mb-5">
@@ -48,13 +69,12 @@ const Form = () => {
             type="password"
             className="input input-bordered w-full max-w-xs"
           />
+          {errors.password?.message && (
+            <p className="text-red-500">{errors.password.message}</p>
+          )}
         </div>
 
-        <button
-          disabled={!isValid}
-          type="submit"
-          className="btn btn-accent px-8"
-        >
+        <button type="submit" className="btn btn-accent px-8">
           {isSubmitted ? "Submitted" : "Submit"}
         </button>
       </form>
