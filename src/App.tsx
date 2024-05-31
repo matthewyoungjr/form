@@ -1,7 +1,12 @@
+import Form from "./components/form/Form";
+import Text from "./components/Text";
+
 function App() {
   return (
     <>
-      <h1 className="text-md">Hello World</h1>
+      <Text text="Sign Up" />
+
+      <Form />
     </>
   );
 }
